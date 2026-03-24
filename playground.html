@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Playground – Denisa Coteanu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="playground.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body class="page-playground ready page-turn-entry">
+    <div class="first-screen-wrap" id="firstScreenWrap" aria-hidden="true">
+        <div class="loader-pre first-screen" id="firstScreen">
+            <div class="loader-pre__books">
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book loader-pre__book--third" id="firstScreenBookThird" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+    <div class="site-cursor" id="siteCursor" aria-hidden="true">
+        <span class="site-cursor__dot"></span>
+        <span class="site-cursor__label" id="siteCursorLabel">Explore</span>
+    </div>
+
+    <!-- Sticky top navigation (same structure as all pages) -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="top-nav__inner">
+            <a href="index.html#book-deck" class="top-nav__brand">Denisa Coteanu</a>
+            <button type="button" class="top-nav__menu-btn" id="navMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+                <span class="top-nav__menu-icon"></span>
+            </button>
+            <nav class="top-nav__links" id="topNavLinks">
+                <a href="index.html#work" class="top-nav__link">Work</a>
+                <a href="about.html" class="top-nav__link">About</a>
+                <a href="index.html#services" class="top-nav__link">Services</a>
+                <a href="playground.html" class="top-nav__link" aria-current="page">Archive</a>
+                <a href="contact.html" class="top-nav__link top-nav__btn">Contact</a>
+                <button type="button" class="top-nav__mute" id="audioMuteBtn" aria-label="Toggle sound">Mute</button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="pageTransitionWrap" class="page-transition-wrap playground-wrap">
+        <main class="playground-main">
+            <section class="playground-hero" id="hero" aria-labelledby="playground-hero-title">
+                <div class="playground-hero__inner">
+                    <h1 id="playground-hero-title" class="playground-hero__title">
+                        <span class="playground-hero__line">A space to explore</span>
+                        <span class="playground-hero__line">Unfinished ideas</span>
+                        <span class="playground-hero__line">And everything in between</span>
+                    </h1>
+                </div>
+            </section>
+
+            <section class="playground-overview" aria-labelledby="playground-overview-label">
+                <div class="playground-overview__inner">
+                    <p class="playground-overview__label" id="playground-overview-label">Overview</p>
+                    <p class="playground-overview__text">
+                        A personal collection of experiments, random designs, and directions that didn't make it into final projects. Work that doesn't fit a final outcome, but still reflects the process behind it.
+                    </p>
+                </div>
+            </section>
+
+            <section class="playground-grid" id="projects" aria-label="Experimental projects">
+                <div class="playground-grid__inner">
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground1.png" alt="Regal Chocolates packaging design" class="playground-grid__img" width="800" height="1200" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2024)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Packaging Design</span>
+                                <span class="playground-grid__line">'Regal Chocolates' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground3.png" alt="Orbit Sky branding" class="playground-grid__img" width="800" height="1200" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2023)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Branding</span>
+                                <span class="playground-grid__line">'Orbit Sky' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground8.png" alt="Wedding invitation – A day to remember" class="playground-grid__img" width="800" height="800" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2024)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Graphic Design, Print Design</span>
+                                <span class="playground-grid__line">'A day to remember' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground5.png" alt="Mercedes Evolution editorial" class="playground-grid__img" width="800" height="1200" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2024)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Editorial Design</span>
+                                <span class="playground-grid__line">'Mercedes' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground6.png" alt="Vauense sports poster design" class="playground-grid__img" width="800" height="1200" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2023)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Graphic Design, Print Design</span>
+                                <span class="playground-grid__line">'Vauense' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground7.png" alt="Forest Delights packaging" class="playground-grid__img" width="800" height="800" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2024)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Packaging Design</span>
+                                <span class="playground-grid__line">'Forest Delights' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground4.png" alt="Beraria H web app UI" class="playground-grid__img" width="800" height="1200" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2023)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">UI/UX</span>
+                                <span class="playground-grid__line">'Beraria H web app' project</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="playground-grid__item">
+                        <figure class="playground-grid__figure">
+                            <img src="images/playground2.png" alt="Riviera Park branding" class="playground-grid__img" width="800" height="600" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="playground-grid__meta">
+                            <span class="playground-grid__year">(2024)</span>
+                            <div class="playground-grid__info">
+                                <span class="playground-grid__line">Branding</span>
+                                <span class="playground-grid__line">'Riviera Park' project</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer" id="footer">
+            <div class="footer__inner">
+                <div class="footer__top">
+                    <div class="footer__col footer__col--services">
+                        <p>Web Design</p>
+                        <p>Front-End Development</p>
+                        <p>Branding & Visual Identity</p>
+                        <p>Interactive Experiences</p>
+                    </div>
+                    <div class="footer__col footer__col--experience">
+                        <p>2+ years of experience</p>
+                        <a href="index.html#work" class="footer__link">View work</a>
+                    </div>
+                    <div class="footer__col footer__col--location">
+                        <p>Eindhoven, the Netherlands</p>
+                        <p>2026</p>
+                    </div>
+                </div>
+                <h2 class="footer__name">DENISA COTEANU</h2>
+                <div class="footer__bottom">
+                    <div class="footer__contact">
+                        <span>Contact</span>
+                        <a href="mailto:dmcb1712@gmail.com">dmcb1712@gmail.com</a>
+                    </div>
+                    <p class="footer__copyright">© 2026 Denisa Coteanu. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <audio id="siteAudio" src="audio/track.mp3" loop preload="auto"></audio>
+    <script src="audio-shared.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

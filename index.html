@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body>
+    <!-- Site cursor – round dot with text below (desktop only) -->
+    <div class="site-cursor" id="siteCursor" aria-hidden="true">
+        <span class="site-cursor__dot"></span>
+        <span class="site-cursor__label" id="siteCursorLabel">Explore</span>
+    </div>
+
+    <div class="loader" id="loader">
+        <!-- Pre-loader: 3 book icons, third tilts then straightens -->
+        <div class="loader-pre" id="loaderPre" aria-hidden="true">
+            <div class="loader-pre__books">
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book loader-pre__book--third" id="loaderPreBookThird" aria-hidden="true"></div>
+            </div>
+        </div>
+        <!-- Library screen: reveals from top to bottom (reversed image-reveal) when pre-loader ends -->
+        <div class="loader-library-screen" id="loaderLibraryScreen">
+            <div class="loader-library" id="loaderLibrary"></div>
+            <p class="loader-text loader-text--line1" data-loader-line="1">Every book holds a story.</p>
+            <p class="loader-text loader-text--line2" data-loader-line="2">Here are a few from my shelf.</p>
+            <div class="loader-cursor" id="loaderCursor" aria-hidden="true">
+                <span class="loader-cursor__dot"></span>
+                <span class="loader-cursor__label">Click</span>
+            </div>
+            <div class="loader-cursor-trail" id="loaderCursorTrail" aria-hidden="true"></div>
+            <p class="loader-sound-hint">Click to enable sound</p>
+        </div>
+    </div>
+
+    <!-- Sticky top navigation (same structure as all pages; outside wrap on home so it blends with content) -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="top-nav__inner">
+            <a href="index.html#book-deck" class="top-nav__brand">Denisa Coteanu</a>
+            <button type="button" class="top-nav__menu-btn" id="navMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+                <span class="top-nav__menu-icon"></span>
+            </button>
+            <nav class="top-nav__links" id="topNavLinks">
+                <a href="index.html#work" class="top-nav__link">Work</a>
+                <a href="about.html" class="top-nav__link">About</a>
+                <a href="index.html#services" class="top-nav__link">Services</a>
+                <a href="playground.html" class="top-nav__link">Archive</a>
+                <a href="contact.html" class="top-nav__link top-nav__btn">Contact</a>
+                <button type="button" class="top-nav__mute" id="audioMuteBtn" aria-label="Toggle sound">Mute</button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="pageTransitionWrap" class="page-transition-wrap">
+    <section class="hero" id="hero">
+        <nav class="book-deck" id="book-deck" aria-label="Main navigation">
+            <div class="deck-card deck-card--gray" aria-hidden="true"></div>
+            <div class="deck-card deck-card--gray" aria-hidden="true"></div>
+            <a href="index.html#work" class="deck-card deck-card--work">WORK</a>
+            <a href="about.html" class="deck-card deck-card--about">ABOUT</a>
+            <a href="index.html#services" class="deck-card deck-card--services">SERVICES</a>
+            <a href="playground.html" class="deck-card deck-card--archive">ARCHIVE</a>
+            <a href="contact.html" class="deck-card deck-card--contact">CONTACT</a>
+            <div class="deck-card deck-card--gray" aria-hidden="true"></div>
+            <div class="deck-card deck-card--gray" aria-hidden="true"></div>
+        </nav>
+
+        <p class="scroll-prompt">SCROLL TO EXPLORE</p>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-spacer" aria-hidden="true"></div>
+        <div class="about-content">
+            <div class="about-left">
+                <p class="about-text--small">Design is not about reaching a final point, but about constant improvement. Each project becomes a new chapter, refining how I think, my process, and the way I build digital experiences.</p>
+            </div>
+            <div class="about-text--big">
+                <span class="about-line">DESIGN IS</span>
+                <span class="about-line">A JOURNEY, NOT</span>
+                <span class="about-line">A DESTINATION.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-me" id="about-me">
+        <h2 class="about-me__title">ABOUT ME</h2>
+        <p class="about-me__text">I'm drawn to design that carries meaning. Through each project, I try to tell a story, express emotion, and build experiences where every decision has a reason.</p>
+    </section>
+
+    <section class="services" id="services">
+        <div class="services__inner">
+            <h2 class="services__title">SERVICES</h2>
+            <ul class="services__list" aria-label="Services I offer">
+                <li class="service-item service-item--work">
+                    <span class="service-item__icon" aria-hidden="true"></span>
+                    <span class="service-item__bookmark" aria-hidden="true"></span>
+                    <span class="service-item__label">Web Design</span>
+                    <span class="service-item__description">I design websites that are clear, easy to use, and visually balanced. The focus is on creating layouts that guide users naturally while still feeling engaging.</span>
+                </li>
+                <li class="service-item service-item--about">
+                    <span class="service-item__icon" aria-hidden="true"></span>
+                    <span class="service-item__bookmark" aria-hidden="true"></span>
+                    <span class="service-item__label">Front-End Development</span>
+                    <span class="service-item__description">I turn designs into real, working websites. I focus on smooth interactions, responsiveness, and making sure everything works well across devices.</span>
+                </li>
+                <li class="service-item service-item--services">
+                    <span class="service-item__icon" aria-hidden="true"></span>
+                    <span class="service-item__bookmark" aria-hidden="true"></span>
+                    <span class="service-item__label">Branding & Visual Identity</span>
+                    <span class="service-item__description">I shape how a brand looks and feels, from colors and typography to overall style. The goal is to create something consistent, recognizable, and easy to connect with.</span>
+                </li>
+                <li class="service-item service-item--archive">
+                    <span class="service-item__icon" aria-hidden="true"></span>
+                    <span class="service-item__bookmark" aria-hidden="true"></span>
+                    <span class="service-item__label">Interactive Experiences</span>
+                    <span class="service-item__description">I explore more creative approaches using motion, 3D, and interaction. These projects focus on creating a feeling, not just presenting information.</span>
+                </li>
+                <li class="service-item service-item--ecommerce">
+                    <span class="service-item__icon" aria-hidden="true"></span>
+                    <span class="service-item__bookmark" aria-hidden="true"></span>
+                    <span class="service-item__label">E-commerce &amp; Automation</span>
+                    <span class="service-item__description">I build and improve online stores, focusing on structure, user flow, and automation. From Shopify setups to backend processes, I help make things work more efficiently.</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="work" id="work" aria-label="Work">
+        <div class="work__inner">
+            <article class="work-item work-item--right work-item--1">
+                <a href="case-study.html#beraria-h" class="work-item__block">
+                    <div class="work-item__image-wrap">
+                        <img src="images/img1.png" alt="Beraria H – Interactive Digital Experience" class="work-item__image case-media-reveal">
+                    </div>
+                    <p class="work-item__info">Beraria H<br><span class="work-item__meta">Interactive Digital Experience</span></p>
+                </a>
+            </article>
+            <article class="work-item work-item--left work-item--2">
+                <a href="case-study.html#posters-beraria-h" class="work-item__block">
+                    <div class="work-item__image-wrap">
+                        <img src="images/img2.png" alt="Beraria H – Visual Design for Live Events" class="work-item__image case-media-reveal">
+                    </div>
+                    <p class="work-item__info">Beraria H Posters<br><span class="work-item__meta">Visual Design for Live Events</span></p>
+                </a>
+            </article>
+            <article class="work-item work-item--right work-item--3">
+                <a href="case-study.html#vodkhaz" class="work-item__block">
+                    <div class="work-item__image-wrap">
+                        <img src="images/img3.png" alt="Vodkhaz – Immersive Digital Experience" class="work-item__image case-media-reveal">
+                    </div>
+                    <p class="work-item__info">Vodkhaz<br><span class="work-item__meta">Immersive Digital Experience</span></p>
+                </a>
+            </article>
+        </div>
+        <a href="playground.html" class="work__cta">VIEW ARCHIVE</a>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials__trail" id="testimonialsTrail" aria-hidden="true"></div>
+        <div class="testimonials__inner">
+            <div class="testimonials__note">
+                <span class="testimonials__pin" aria-hidden="true"></span>
+                <p class="testimonials__eyebrow">CLIENT REVIEW</p>
+                <p class="testimonials__quote">
+                    Denisa was super easy to work with and always delivered really solid design work.
+                    She paid attention to details and was always open to feedback.
+                </p>
+                <p class="testimonials__meta">GRAPHIC DESIGN</p>
+            </div>
+            <div class="testimonials__stack" aria-label="More testimonials">
+                <button type="button" class="testimonials__stack-note testimonials__stack-note--1 is-active" data-index="0" aria-label="Show first testimonial"></button>
+                <button type="button" class="testimonials__stack-note testimonials__stack-note--2" data-index="1" aria-label="Show second testimonial"></button>
+                <button type="button" class="testimonials__stack-note testimonials__stack-note--3" data-index="2" aria-label="Show third testimonial"></button>
+            </div>
+            <div class="testimonials__note-source">
+                <p class="testimonials__eyebrow">CLIENT REVIEW</p>
+                <p class="testimonials__quote">
+                    Denisa handled both design and research really well and was always on top of her tasks.
+                    Fast, reliable, and great to have in the team.
+                </p>
+                <p class="testimonials__meta">UX/UI DESIGN &amp; DEVELOPMENT</p>
+            </div>
+            <div class="testimonials__note-source">
+                <p class="testimonials__eyebrow">CLIENT REVIEW</p>
+                <p class="testimonials__quote">
+                    Super easy to work with, very professional, and always delivers exactly what's needed (sometimes even better than agencies we've worked with before).
+                </p>
+                <p class="testimonials__meta">SHOPIFY AUTOMATION E-COMMERCE</p>
+            </div>
+            <p class="testimonials__aside">
+                A few reflections from the people I worked with along the way.
+            </p>
+        </div>
+    </section>
+
+    <div id="archive" class="page-anchor" aria-hidden="true"></div>
+    <footer class="footer" id="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div class="footer__col footer__col--services">
+                    <p>Web Design</p>
+                    <p>Front-End Development</p>
+                    <p>Branding & Visual Identity</p>
+                    <p>Interactive Experiences</p>
+                </div>
+                <div class="footer__col footer__col--experience">
+                    <p>2+ years of experience</p>
+                    <a href="index.html#work" class="footer__link">View work</a>
+                </div>
+                <div class="footer__col footer__col--location">
+                    <p>Eindhoven, the Netherlands</p>
+                    <p>2026</p>
+                </div>
+            </div>
+            <h2 class="footer__name">DENISA COTEANU</h2>
+            <div class="footer__bottom">
+                <div class="footer__contact">
+                    <span>Contact</span>
+                    <a href="mailto:dmcb1712@gmail.com">dmcb1712@gmail.com</a>
+                </div>
+                <p class="footer__copyright">© 2026 Denisa Coteanu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </div><!-- /.page-transition-wrap -->
+
+    <audio id="siteAudio" src="audio/track.mp3" loop preload="auto"></audio>
+    <script src="audio-shared.js"></script>
+    <script src="loader.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

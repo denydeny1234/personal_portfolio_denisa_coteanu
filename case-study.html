@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Case Study – Denisa Coteanu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="case-study.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+</head>
+<body class="case-study-page ready page-turn-entry">
+    <!-- First screen: same as homepage (3 books) → then page-turn reveals this page -->
+    <div class="first-screen-wrap" id="firstScreenWrap" aria-hidden="true">
+        <div class="loader-pre first-screen" id="firstScreen">
+            <div class="loader-pre__books">
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book" aria-hidden="true"></div>
+                <div class="loader-pre__book loader-pre__book--third" id="firstScreenBookThird" aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Site cursor – same as homepage (desktop only) -->
+    <div class="site-cursor" id="siteCursor" aria-hidden="true">
+        <span class="site-cursor__dot"></span>
+        <span class="site-cursor__label" id="siteCursorLabel">Explore</span>
+    </div>
+
+    <a href="index.html" id="caseStudyCloseBtn" class="case-study-close" hidden aria-hidden="true">
+        <span class="case-study-close__label">Close</span>
+        <span class="case-study-close__x" aria-hidden="true">×</span>
+    </a>
+
+    <!-- Sticky top navigation (same structure as all pages) -->
+    <header class="top-nav" aria-label="Main navigation">
+        <div class="top-nav__inner">
+            <a href="index.html#book-deck" class="top-nav__brand">Denisa Coteanu</a>
+            <button type="button" class="top-nav__menu-btn" id="navMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+                <span class="top-nav__menu-icon"></span>
+            </button>
+            <nav class="top-nav__links" id="topNavLinks">
+                <a href="index.html#work" class="top-nav__link">Work</a>
+                <a href="about.html" class="top-nav__link">About</a>
+                <a href="index.html#services" class="top-nav__link">Services</a>
+                <a href="playground.html" class="top-nav__link">Archive</a>
+                <a href="contact.html" class="top-nav__link top-nav__btn">Contact</a>
+                <button type="button" class="top-nav__mute" id="audioMuteBtn" aria-label="Toggle sound">Mute</button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="pageTransitionWrap" class="page-transition-wrap">
+    <main class="case-main">
+        <!-- Hero – background image + large stacked title + CTA and location -->
+        <section class="case-hero" id="hero">
+            <div class="case-hero__bg" id="caseHeroBg" aria-hidden="true"></div>
+            <div class="case-hero__overlay" aria-hidden="true"></div>
+
+            <div class="case-hero__inner">
+                <div class="case-hero__title-wrap">
+                    <h1 class="case-hero__title-line case-hero__title-line--primary" id="caseHeroTitlePrimary">
+                        <!-- populated by JS -->
+                    </h1>
+                    <h2 class="case-hero__title-line" id="caseHeroTitleSecondary">
+                        <!-- populated by JS -->
+                    </h2>
+                </div>
+
+                <div class="case-hero__meta">
+                    <p class="case-hero__location" id="caseHeroLocation">
+                        <!-- populated by JS -->
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case details – services and story -->
+        <section class="case-details" id="details">
+            <div class="case-details__inner">
+                <div class="case-details__col case-details__col--services">
+                    <h2 class="case-details__eyebrow" id="caseServicesLabel">SERVICES</h2>
+                    <ul class="case-details__services" id="caseServicesList">
+                        <!-- populated by JS -->
+                    </ul>
+                </div>
+                <div class="case-details__col case-details__col--story">
+                    <h2 class="case-details__eyebrow case-details__eyebrow--right" id="caseStoryHeading">
+                        <!-- populated by JS -->
+                    </h2>
+                    <p class="case-details__paragraph" id="caseStoryPara1"></p>
+                    <p class="case-details__paragraph" id="caseStoryPara2"></p>
+                    <p class="case-details__paragraph" id="caseStoryPara3"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case video section – simple full-bleed video -->
+        <section class="case-video" id="experience">
+            <div class="case-video__inner">
+                <div class="case-video__frame case-media-reveal">
+                    <video id="caseVideo" class="case-video__media" tabindex="-1" autoplay muted loop playsinline></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case gallery section – 1 image full-width + 2 images 50/50 -->
+        <section class="case-gallery" id="gallery">
+            <div class="case-gallery__inner">
+                <div class="case-gallery__top case-media-reveal">
+                    <img id="caseGalleryTop" class="case-gallery__img" src="" alt="">
+                </div>
+                <div class="case-gallery__bottom">
+                    <div class="case-gallery__bottom-item case-media-reveal">
+                        <img id="caseGalleryBottomLeft" class="case-gallery__img" src="" alt="">
+                    </div>
+                    <div class="case-gallery__bottom-item case-media-reveal">
+                        <img id="caseGalleryBottomRight" class="case-gallery__img" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Second case video section – same layout, after first gallery -->
+        <section class="case-video case-video--secondary" id="experience-2">
+            <div class="case-video__inner">
+                <div class="case-video__frame case-media-reveal">
+                    <video id="caseVideoSecondary" class="case-video__media" tabindex="-1" autoplay muted loop playsinline></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Second gallery section – same layout: 1 full-width + 2 x 50% -->
+        <section class="case-gallery case-gallery--secondary" id="gallery-2">
+            <div class="case-gallery__inner">
+                <div class="case-gallery__top case-media-reveal">
+                    <img id="caseGalleryTop2" class="case-gallery__img" src="" alt="">
+                </div>
+                <div class="case-gallery__bottom">
+                    <div class="case-gallery__bottom-item case-media-reveal">
+                        <img id="caseGalleryBottomLeft2" class="case-gallery__img" src="" alt="">
+                    </div>
+                    <div class="case-gallery__bottom-item case-media-reveal">
+                        <img id="caseGalleryBottomRight2" class="case-gallery__img" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full-width image + full-width video, no spacing -->
+        <section class="case-media-strip" id="strip-1">
+            <div class="case-media-strip__item case-media-reveal">
+                <img id="caseStripImage1" class="case-media-strip__img" src="" alt="">
+            </div>
+            <div class="case-media-strip__item case-media-reveal">
+                <video id="caseStripVideo1" class="case-media-strip__video" tabindex="-1" autoplay muted loop playsinline></video>
+            </div>
+        </section>
+
+        <!-- Next project teaser – big clickable title -->
+        <section class="case-next" id="next-project">
+            <a id="caseNextLink" class="case-next__link" href="#">
+                <h2 class="case-next__title" id="caseNextTitle">
+                    Next project
+                </h2>
+            </a>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div class="footer__col footer__col--services">
+                    <p>Web Design</p>
+                    <p>Front-End Development</p>
+                    <p>Branding & Visual Identity</p>
+                    <p>Interactive Experiences</p>
+                </div>
+                <div class="footer__col footer__col--experience">
+                    <p>2+ years of experience</p>
+                    <a href="index.html#work" class="footer__link">View work</a>
+                </div>
+                <div class="footer__col footer__col--location">
+                    <p>Eindhoven, the Netherlands</p>
+                    <p>2026</p>
+                </div>
+            </div>
+            <h2 class="footer__name">DENISA COTEANU</h2>
+            <div class="footer__bottom">
+                <div class="footer__contact">
+                    <span>Contact</span>
+                    <a href="mailto:dmcb1712@gmail.com">dmcb1712@gmail.com</a>
+                </div>
+                <p class="footer__copyright">© 2026 Denisa Coteanu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </div><!-- /.page-transition-wrap -->
+
+    <audio id="siteAudio" src="audio/track.mp3" loop preload="auto"></audio>
+    <script src="audio-shared.js"></script>
+    <script src="case-studies.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
+

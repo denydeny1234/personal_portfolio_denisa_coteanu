@@ -1,0 +1,177 @@
+/* Contact page – brand lime (#CED700), dark type for contrast */
+
+.page-contact {
+    background-color: #ced700;
+    min-height: 100vh;
+    font-family: 'Oswald', sans-serif;
+    color: #111418;
+}
+
+.contact-page {
+    padding: clamp(5rem, 12vw, 9rem) clamp(2rem, 6vw, 4rem) clamp(4rem, 8vw, 6rem);
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-page__eyebrow {
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(17, 20, 24, 0.55);
+    margin: 0 0 1rem 0;
+}
+
+.contact-page__title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.75rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111418;
+    line-height: 1.02;
+    margin: 0 0 1.5rem 0;
+}
+
+.contact-page__lead {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(17, 20, 24, 0.88);
+    max-width: 36rem;
+    margin: 0 0 2.5rem 0;
+}
+
+.contact-page__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Phones first (left); email on the right from tablet up */
+.contact-page__contact-block {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    width: 100%;
+    max-width: 42rem;
+    align-items: start;
+}
+
+.contact-page__phones {
+    min-width: 0;
+}
+
+.contact-page__email {
+    min-width: 0;
+}
+
+@media (min-width: 600px) {
+    .contact-page__contact-block {
+        grid-template-columns: 1fr auto;
+    }
+
+    .contact-page__email {
+        text-align: left;
+        justify-self: end;
+    }
+}
+
+.contact-page__phone-line {
+    margin: 0 0 0.65rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+}
+
+.contact-page__phone-line:last-child {
+    margin-bottom: 0;
+}
+
+.contact-page__phone-region {
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    font-weight: 600;
+    color: rgba(17, 20, 24, 0.65);
+    min-width: 6.5rem;
+}
+
+.contact-page__link--inline {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    border-bottom-width: 1px;
+}
+
+.contact-page__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17, 20, 24, 0.5);
+    margin: 0 0 0.35rem 0;
+}
+
+.contact-page__link {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 600;
+    color: #111418;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(17, 20, 24, 0.35);
+    padding-bottom: 0.15em;
+    align-self: flex-start;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.contact-page__link:hover {
+    color: #000;
+    border-color: #111418;
+}
+
+.contact-page__meta {
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    font-weight: 500;
+    color: rgba(17, 20, 24, 0.9);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .contact-page {
+        padding: 4.5rem 1.25rem 3rem;
+        padding-top: max(4.5rem, var(--content-below-nav));
+        min-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-page {
+        padding: 4rem 1rem 2.5rem;
+        padding-top: max(4rem, var(--content-below-nav));
+    }
+
+    .contact-page__title {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    .contact-page__link {
+        font-size: clamp(1rem, 4.5vw, 1.35rem);
+        word-break: break-word;
+    }
+}
+
+/* Tablet & phone: no text below 18px (1rem with html 112.5% in common.css) */
+@media (max-width: 1024px) {
+    .contact-page__eyebrow {
+        font-size: clamp(1rem, 1.2vw, 1.05rem);
+    }
+    .contact-page__phone-region {
+        font-size: clamp(1rem, 1.15vw, 1.05rem);
+    }
+    .contact-page__label {
+        font-size: 1rem;
+    }
+    .contact-page__meta {
+        font-size: clamp(1rem, 1.25vw, 1.1rem);
+    }
+}

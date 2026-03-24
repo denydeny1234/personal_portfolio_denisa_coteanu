@@ -1,0 +1,588 @@
+/* Common styles – shared across homepage and about page */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600;700&family=Oswald:wght@400;500;600;700&display=swap');
+
+/* Page transition: same vertical reveal as site images (clip-path inset top → full) */
+.page-transition-wrap {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+}
+
+/* When using page-turn overlay, content is visible underneath (no clip) */
+body.page-turn-entry .page-transition-wrap {
+    clip-path: none;
+    opacity: 1;
+}
+
+/* Page-turn overlay: curved fold from top-right (same as loader pre → library) */
+.page-turn-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    pointer-events: none;
+    perspective: 1400px;
+}
+.page-turn-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: #1a1510;
+    transform-origin: 100% 0%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* First screen (3 books) before opening about/case-study – same look as homepage pre-loader */
+.first-screen-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    perspective: 1400px;
+    pointer-events: none;
+}
+.first-screen-wrap .first-screen {
+    position: absolute;
+    inset: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+/* Prevent horizontal scroll from full-bleed sections / transforms on narrow viewports */
+@media (max-width: 1024px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+    /* 1rem = 18px at default 16px UA font — minimum readable body size */
+    html {
+        font-size: 112.5%;
+    }
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    color: #202427;
+}
+
+/* ========== Shared navigation (identical on all pages – homepage style) ========== */
+.nav-common,
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.25rem;
+    z-index: 10000;
+    background: transparent;
+    mix-blend-mode: difference;
+}
+
+/*
+ * Subpages only (not index.html): keep the bar visible on load.
+ * Homepage hides the bar until #about-me on desktop — see style.css `.top-nav` + `.scrolled-to-about-me`.
+ * Same blend + colors as homepage: mix-blend-mode:difference on .top-nav (white UI inverted on backgrounds).
+ */
+body.page-about .top-nav,
+body.page-playground .top-nav,
+body.page-contact .top-nav,
+body.case-study-page .top-nav {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Same max width + horizontal gutter as .work__inner / .about-page so nav edges line up with project column */
+.nav-common__inner,
+.top-nav__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(2rem, 6vw, 4rem);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.nav-common__brand,
+.top-nav__brand {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav-common__menu-btn,
+.top-nav__menu-btn {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    z-index: 10001;
+}
+
+.nav-common__menu-icon,
+.nav-common__menu-icon::before,
+.nav-common__menu-icon::after,
+.top-nav__menu-icon,
+.top-nav__menu-icon::before,
+.top-nav__menu-icon::after {
+    display: block;
+    width: 1.4rem;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-common__menu-icon,
+.top-nav__menu-icon {
+    position: relative;
+}
+
+.nav-common__menu-icon::before,
+.nav-common__menu-icon::after,
+.top-nav__menu-icon::before,
+.top-nav__menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.nav-common__menu-icon::before,
+.top-nav__menu-icon::before { top: -0.4rem; }
+.nav-common__menu-icon::after,
+.top-nav__menu-icon::after { bottom: -0.4rem; }
+
+.nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon,
+.top-nav__menu-btn[aria-expanded="true"] .top-nav__menu-icon {
+    background: transparent;
+}
+
+.nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon::before,
+.top-nav__menu-btn[aria-expanded="true"] .top-nav__menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon::after,
+.top-nav__menu-btn[aria-expanded="true"] .top-nav__menu-icon::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+.nav-common__links,
+.top-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-common__link,
+.top-nav__link {
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav-common__link:hover,
+.top-nav__link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* Current page in nav (About / Archive / Contact when applicable) */
+.top-nav__link[aria-current="page"] {
+    font-weight: 700;
+    opacity: 1;
+}
+
+.nav-common__btn,
+.top-nav__btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    background: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: opacity 0.2s, background 0.2s;
+}
+
+.nav-common__btn:hover,
+.top-nav__btn:hover {
+    opacity: 0.9;
+    background: #e8e8e8;
+}
+
+/* Shared audio mute button (nav) */
+.nav-common__mute,
+.top-nav__mute {
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.9;
+    padding: 0.25rem 0.6rem;
+    transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.nav-common__mute:hover,
+.top-nav__mute:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== Shared footer ========== */
+.footer-common {
+    width: 100%;
+    background-color: #111418;
+    color: #F5FFFF;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 6vw, 4rem);
+    box-sizing: border-box;
+}
+
+.footer-common__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.footer-common__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(2rem, 8vw, 6rem);
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    letter-spacing: 0.08em;
+}
+
+.footer-common__col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.footer-common__col p {
+    margin: 0;
+}
+
+.footer-common__link {
+    color: #F5FFFF;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.footer-common__name {
+    margin: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: min(280px, 19vw);
+    letter-spacing: 0.03em;
+    color: #CED700;
+    text-align: center;
+    line-height: 0.85;
+    white-space: nowrap;
+}
+
+.footer-common__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+}
+
+.footer-common__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.footer-common__contact span {
+    opacity: 0.8;
+}
+
+.footer-common__contact a {
+    color: #F5FFFF;
+    text-decoration: none;
+}
+
+.footer-common__contact a:hover {
+    text-decoration: underline;
+}
+
+.footer-common__copyright {
+    margin: 0;
+    text-align: center;
+    flex: 1;
+}
+
+.footer-common__policy {
+    color: #F5FFFF;
+    text-decoration: none;
+}
+
+.footer-common__policy:hover {
+    text-decoration: underline;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+    /* Fixed nav (3.25rem) + notch + gap — use for main content padding-top on tablet/phone */
+    :root {
+        --content-below-nav: calc(3.25rem + env(safe-area-inset-top, 0px) + 1.25rem);
+    }
+
+    /* Full-screen frosted white scrim when drawer is open */
+    body.nav-open {
+        overflow: hidden;
+    }
+    body.nav-open::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(28px) saturate(1.05);
+        -webkit-backdrop-filter: blur(28px) saturate(1.05);
+        pointer-events: auto;
+    }
+
+    /* Bar sits above scrim: turn off difference blend + use dark UI on white */
+    body.nav-open .nav-common,
+    body.nav-open .top-nav {
+        mix-blend-mode: normal;
+    }
+    body.nav-open .nav-common__brand,
+    body.nav-open .top-nav__brand {
+        color: #0a0a0a;
+    }
+    body.nav-open .nav-common__menu-icon,
+    body.nav-open .nav-common__menu-icon::before,
+    body.nav-open .nav-common__menu-icon::after,
+    body.nav-open .top-nav__menu-icon,
+    body.nav-open .top-nav__menu-icon::before,
+    body.nav-open .top-nav__menu-icon::after {
+        background: #0a0a0a;
+    }
+    body.nav-open .nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon,
+    body.nav-open .top-nav__menu-btn[aria-expanded="true"] .top-nav__menu-icon {
+        background: transparent;
+    }
+
+    /* Notch / home indicator: keep nav clear of system UI */
+    .nav-common,
+    .top-nav {
+        height: auto;
+        min-height: 3.25rem;
+        padding-top: env(safe-area-inset-top, 0px);
+        box-sizing: border-box;
+    }
+
+    .nav-common__inner,
+    .top-nav__inner {
+        min-height: 3.25rem;
+    }
+
+    .nav-common__menu-btn,
+    .top-nav__menu-btn {
+        display: flex;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        z-index: 10001;
+    }
+    .nav-common__menu-icon,
+    .nav-common__menu-icon::before,
+    .nav-common__menu-icon::after {
+        display: block;
+        width: 1.4rem;
+        height: 2px;
+        background: #fff;
+        border-radius: 1px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .nav-common__menu-icon {
+        position: relative;
+    }
+    .nav-common__menu-icon::before,
+    .nav-common__menu-icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+    }
+    .nav-common__menu-icon::before { top: -0.4rem; }
+    .nav-common__menu-icon::after { bottom: -0.4rem; }
+    .nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon {
+        background: transparent;
+    }
+    .nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon::before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+    .nav-common__menu-btn[aria-expanded="true"] .nav-common__menu-icon::after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+    .nav-common__links,
+    .top-nav__links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(18rem, 85vw);
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(28px) saturate(1.05);
+        -webkit-backdrop-filter: blur(28px) saturate(1.05);
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.08);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: calc(4.5rem + env(safe-area-inset-top, 0px)) 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px));
+        gap: 0.5rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 10000;
+        isolation: isolate;
+    }
+    body.nav-open .nav-common__links,
+    body.nav-open .top-nav__links {
+        transform: translateX(0);
+    }
+    /* Mobile panel: dark text on frosted white; min 25px for tap targets */
+    .nav-common__links .nav-common__link,
+    .top-nav__links .top-nav__link {
+        color: #0a0a0a;
+        font-size: max(25px, clamp(1.5625rem, 3.5vw, 1.85rem));
+        line-height: 1.4;
+        padding: 0.6rem 0;
+    }
+    .nav-common__links .nav-common__btn,
+    .top-nav__links .top-nav__btn {
+        color: #0a0a0a;
+        background: transparent;
+        border: none;
+        padding: 0.6rem 0;
+        font-size: max(25px, clamp(1.5625rem, 3.5vw, 1.85rem));
+    }
+    .nav-common__links .nav-common__btn:hover,
+    .top-nav__links .top-nav__btn:hover {
+        background: transparent;
+        opacity: 0.65;
+    }
+    .nav-common__links .nav-common__mute,
+    .top-nav__links .top-nav__mute {
+        color: #0a0a0a;
+        border-color: rgba(0, 0, 0, 0.35);
+        font-size: max(25px, clamp(1.5625rem, 3.5vw, 1.85rem));
+    }
+    .nav-common__inner,
+    .top-nav__inner {
+        padding: 0 clamp(1.5rem, 5vw, 2.5rem);
+        font-size: 1rem;
+    }
+    .nav-common__btn,
+    .top-nav__btn {
+        font-size: 1rem;
+    }
+    .footer-common__top {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+        line-height: 1.55;
+    }
+    .footer-common__bottom {
+        font-size: clamp(1rem, 1.1vw, 1.1rem);
+        line-height: 1.5;
+    }
+    .footer-common__inner {
+        gap: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .footer-common__name {
+        font-size: clamp(2.5rem, 16vw, 8rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-common__inner,
+    .top-nav__inner {
+        padding: 0 1.25rem;
+    }
+    .nav-common__links .nav-common__link,
+    .top-nav__links .top-nav__link {
+        font-size: max(25px, clamp(1.5625rem, 4vw, 1.85rem));
+    }
+    .nav-common__links .nav-common__btn,
+    .top-nav__links .top-nav__btn,
+    .nav-common__links .nav-common__mute,
+    .top-nav__links .top-nav__mute {
+        font-size: max(25px, clamp(1.5625rem, 4vw, 1.85rem));
+    }
+    .footer-common {
+        padding: 2rem 1.25rem;
+    }
+    .footer-common__top {
+        flex-direction: column;
+        gap: 1.25rem;
+        font-size: 1.05rem;
+        line-height: 1.55;
+    }
+    .footer-common__bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    .footer-common__name {
+        font-size: clamp(2.5rem, 16vw, 3.5rem);
+    }
+}
